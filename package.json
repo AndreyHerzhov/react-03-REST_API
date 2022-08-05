@@ -1,8 +1,8 @@
 {
-  "name": "react-homework-template",
+  "name": "react-03-rest_api",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://goitacademy.github.io/react-homework-template/",
+  "homepage": "https://AndreyHerzhov.github.io/react-03-REST_API/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
