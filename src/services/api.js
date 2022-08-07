@@ -16,3 +16,8 @@ export const deleteMaterial = async (id) => {
     const response = await axios.delete(`/materials/${id}`)
     return response.data
 }
+
+export const updateMaterial = async fields => {
+  const response = await axios.put(`/materials/${fields.id}`, fields);
+  return response.data;
+};

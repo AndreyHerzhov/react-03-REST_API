@@ -1,4 +1,9 @@
 import { Formik, Form, Field } from "formik"
+import styled from "styled-components"
+
+const Input = styled(Field)`
+    font-size: 40px;
+`
 
 export const MaterialEditorForm = ({onSubmit }) => {
     const handleSubmit = async (values, actions) => {
@@ -14,11 +19,11 @@ export const MaterialEditorForm = ({onSubmit }) => {
                     <Form>
                             <label>
                                 Описание
-                                <Field name="title"/>
+                                <Input name="title"/>
                             </label>
                             <label>
                                 Ссылка
-                                <Field name="link" type="text"/>
+                                <Input name="link" type="text"/>
                             </label>
                             <button type="submit" disabled={isSubmitting}>Добавить материал</button> 
                     </Form>

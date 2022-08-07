@@ -2,7 +2,7 @@ import { Component } from "react";
 import { GlobalStyle } from "./GlobalStyle";
 import { Layout } from "./Layout";
 import { MaterialEditorForm } from "./MaterialEditorForm/MaterialEditorForm";
-import { Materials } from "./Materials/Materials";
+import { MaterialsList } from "./MaterialsList/MaterialsList";
 import  * as API from '../services/api.js'
 
 
@@ -40,10 +40,29 @@ async componentDidMount() {
 }
 
 deleteMaterials = async(id) => {
-  await API.deleteMaterial(id)
-  this.setState(state => ({
+  try {
+    await API.deleteMaterial(id)
+    this.setState(state => ({
     materials: state.materials.filter(material => material.id !== id)
   }))
+  } catch (error) {
+    this.setState({error: true})
+    console.log(error)
+  }
+}
+
+updateMaterial = async fields => {
+  try {
+      const updatedMaterial = await API.updateMaterial(fields)
+      this.setState(state => ({
+      materials: state.materials.map(material => material.id === fields.id
+      ? updatedMaterial
+      : material )
+  }))
+  } catch (error) {
+    this.setState({error: true})
+    console.log(error)
+  }
 }
 
   render() {
@@ -51,12 +70,15 @@ deleteMaterials = async(id) => {
     return (
       <Layout>
         <GlobalStyle/>
+        <button onClick={this.updateMaterial}>Click</button>
         {error && <p>Ops. Try again</p>}
         <MaterialEditorForm onSubmit={this.addMaterial} />
         {isLoading 
         ? 'LOADING....' 
-        : <Materials items={materials}
-        onDelete={this.deleteMaterials}
+        : <MaterialsList 
+            items={materials}
+            onDelete={this.deleteMaterials}
+            onUpdate={this.updateMaterial}
         />}
         
       </Layout>
